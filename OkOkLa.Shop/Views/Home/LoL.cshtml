@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "League of Legends: Wild Rift";
+}
+
+<div class="container" style="font-family: 'Barlow' , sans-serif;">
+    <div class="row">
+        <div class="col" style="color: white">
+            <img src="https://cdn1.codashop.com/S/content/common/images/mno/legendswildrift_640x241.png" class="img-fluid py-2">
+            <h5><b>League of Legends : Wild Rift</b></h5>
+            <div class="text-justify" style=" font-size:15px">
+                <p>
+                    Harga sudah termasuk PPN.
+                </p>
+                <p>
+                    Bayarlah menggunakan GoPay, ShopeePay, DANA, OVO ataupun langsung di tempat. Tanpa perlu registrasi ataupun log-in.
+                </p>
+                <p>
+                    Top up LOL Wild Rift dalam hitungan detik! Cukup masukan Riot ID Anda, pilih jumlah Wild Core yang Anda inginkan, pilih metode pembayaran dan selesaikan transaksi Anda. Wild Core akan otomatis masuk ke akun League of Legends: Wild Rift Anda
+                    Codashop adalah partner resmi Riot Games!
+                    Unduh dan mainkan League of Legends: Wild Rift sekarang!
+                </p>
+            </div>
+        </div>
+
+        @model OkOkLa.Shop.Models.TransactionModel
+        <div class="col-8">
+            <form asp-controller="Home" asp-action="InsertLoL" class="m-2">
+                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                    <label asp-for="Akungame_Id">Masukkan ID Akun Game</label>
+                    <input asp-for="Akungame_Id" type="text" class="form-control" id="Akungame_Id" placeholder="Masukkan GAME ID">
+                </div>
+
+                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                    <label asp-for="Game_Money">Pilih Nominal Top Up</label>
+                    <select asp-for="Game_Money" id="Game_Money" class="form-control">
+                        <option value="125 Wild Cores">125 Wild Cores + 0 Bonus</option>
+                        <option value="667 Wild Cores">667 Wild Cores + 67 Bonus</option>
+                        <option value="1250 Wild Cores">1250 Wild Cores + 250 Bonus</option>
+                        <option value="2083 Wild Cores">2083 Wild Cores + 633 Bonus</option>
+                        <option value="3333 Wild Cores">3333 Wild Cores + 1333 Bonus</option>
+                        <option value="6667 Wild Cores">6667 Wild Cores + 2967 Bonuss</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                    <label>Pilih Pembayaran</label>
+
+                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
+                        <div class="form-check">
+                            <input asp-for="Metode_Pembayaran" type="radio" value="Bayar Tunai" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
+                            <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                <h4><b>Bayar Tunai</b></h4>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 7px">
+                        <div class="form-check">
+                            <input asp-for="Metode_Pembayaran" type="radio" value="Gopay" id="Metode_Pembayaran" class="form-check-input" style="margin-top:10px;margin-left:-20px;">
+                            <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                <img src="https://antinomi.org/wp-content/uploads/2022/03/logo-gopay-vector.png" class="img-fluid" style="width:110px;">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
+                        <div class="form-check">
+                            <input asp-for="Metode_Pembayaran" type="radio" value="OVO" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
+                            <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo_purple.svg/320px-Logo_ovo_purple.svg.png" class="img-fluid" style="width:100px;">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
+                        <div class="form-check">
+                            <input asp-for="Metode_Pembayaran" type="radio" value="Dana" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
+                            <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/2560px-Logo_dana_blue.svg.png" class="img-fluid" style="width:115px;">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                    <label asp-for="Email">Masukkan Email Anda</label>
+                    <input asp-for="Email" type=" text" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Alamat E-mail">
+                </div>
+
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data yang diinputkan benar?')">Beli</button>
+            </form>
+        </div>
+    </div>
+</div>

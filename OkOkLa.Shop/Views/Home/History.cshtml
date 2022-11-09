@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Transaction History";
+}
+
+<h1 class="p-2">@ViewData["Title"]</h1>
+
+<div class="container">
+    <table class="table table-hover table-bordered table-light">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">ID_User</th>
+                <th scope="col">Game</th>
+                <th scope="col">Game_Money</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Metode Pembayaran</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                var data = (List<TransactionModel>)ViewData["data"]!;
+                foreach (var transaction in data)
+                {
+                    <tr>
+                        <th scope="row">@transaction.Id</th>
+                        <td>@transaction.Akungame_Id</td>
+                        <td>@transaction.Game</td>
+                        <td>@transaction.Game_Money</td>
+                        <td>@transaction.Harga</td>
+                        <td>@transaction.Metode_Pembayaran</td>
+                        <td>@transaction.Email</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+

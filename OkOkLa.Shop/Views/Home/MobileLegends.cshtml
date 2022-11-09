@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Mobile Legends";
+}
+
+<div class="container" style= "font-family: 'Barlow' , sans-serif;">
+    <div class="row" >
+        <div class="col" style="color: white">
+            <img src="https://cdn1.codashop.com/S/content/common/images/mno/mlbb_halloween640x241%20(1).jpg" class="img-fluid py-2">
+            <h5><b>Mobile Legends</b></h5>
+            <div class="text-justify" style=" font-size:15px">
+                <p>
+                    Harga sudah termasuk PPN. 
+                </p>
+                <p>
+                    Top up ML Diamond hanya dalam hitungan detik! Cukup masukan Username MLBB Anda, pilih jumlah Diamond yang Anda inginkan, selesaikan pembayaran, dan Diamond akan secara langsung ditambahkan ke akun Mobile Legends Anda.
+                </p>
+                <p>
+                    Bayarlah menggunakan GoPay, ShopeePay, Dana, OVO ataupun langsung di tempat. Tanpa perlu registrasi ataupun log-in.
+                    Unduh dan mainkan Mobile Legends: Bang Bang sekarang!
+                </p>
+            </div>
+        </div>
+
+        @model OkOkLa.Shop.Models.TransactionModel
+        <div class="col-8">
+            <form asp-controller="Home" asp-action="InsertMobileLegends" class="m-2" >
+                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                    <label asp-for="Akungame_Id">Masukkan ID Akun Game</label>
+                    <input asp-for="Akungame_Id" type="text" class="form-control" id="Akungame_Id" placeholder="Masukkan GAME ID">
+                </div>
+
+                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                    <label asp-for="Game_Money">Pilih Nominal Top Up</label>
+                    <select asp-for="Game_Money" id="Game_Money" class="form-control">
+                        <option value="12 Diamonds">11 Diamonds + 1 Diamonds</option>
+                        <option value="44 Diamonds">40 Diamonds + 4 Diamonds</option>
+                        <option value="85 Diamonds">77 Diamonds + 8 Diamonds</option>
+                        <option value="170 Diamonds">154 Diamonds + 16 Diamonds</option>
+                        <option value="316 Diamonds">256 Diamonds + 40 Diamonds</option>
+                        <option value="408 Diamonds">367 Diamonds + 41 Diamonds</option>
+                        <option value="568 Diamonds">503 Diamonds + 65 Diamonds</option>
+                        <option value="2010 Diamonds">1708 Diamonds + 302 Diamonds</option>
+                        <option value="4830 Diamonds">4003 Diamonds + 827 Diamonds</option>
+                    </select>  
+                </div> 
+
+                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                    <label>Pilih Pembayaran</label>
+
+                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
+                        <div class="form-check">
+                            <input asp-for="Metode_Pembayaran" type="radio" value="Bayar Tunai" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
+                            <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                <h4><b>Bayar Tunai</b></h4>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 7px">
+                        <div class="form-check">
+                            <input asp-for="Metode_Pembayaran" type="radio"  value="Gopay" id="Metode_Pembayaran" class="form-check-input" style="margin-top:10px;margin-left:-20px;">
+                            <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                <img src="https://antinomi.org/wp-content/uploads/2022/03/logo-gopay-vector.png" class="img-fluid" style="width:110px;">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
+                        <div class="form-check">
+                            <input asp-for="Metode_Pembayaran" type="radio" value="OVO" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
+                            <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo_purple.svg/320px-Logo_ovo_purple.svg.png" class="img-fluid" style="width:100px;">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
+                        <div class="form-check">
+                            <input asp-for="Metode_Pembayaran" type="radio" value="Dana" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
+                            <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/2560px-Logo_dana_blue.svg.png" class="img-fluid" style="width:115px;">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                    <label asp-for="Email">Masukkan Email Anda</label>
+                    <input asp-for="Email" type=" text" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Alamat E-mail">
+                </div>
+
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data yang diinputkan benar?')">Beli</button>
+            </form>
+        </div>
+    </div>
+</div>
