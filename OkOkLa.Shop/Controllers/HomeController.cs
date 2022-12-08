@@ -4,6 +4,7 @@ using System.Data;
 using System.Diagnostics;
 using Npgsql;
 using System.Transactions;
+using System;
 
 namespace OkOkLa.Shop.Controllers
 {
@@ -33,19 +34,23 @@ namespace OkOkLa.Shop.Controllers
             return View();
         }
 
-        public IActionResult List()
+        public IActionResult Login()
         {
-            // Reinisialiasi ds dan param agar dataset dan parameter nya kembali null
+            return View();
+        }
+
+        public IActionResult LoginAdmin(string username, string password)
+        {
             ds = new DataSet();
             param = new NpgsqlParameter[] { };
 
             // Query Select
-            query = "SELECT * FROM users;";
+            query = "SELECT * FROM account_admins;";
             // Panggil DBConn untuk eksekusi Query
             helper.DBConn(ref ds, query, param);
 
             // List of User untuk menampung data user
-            List<UserModel> users = new List<UserModel>();
+            List<AccountModel> admins = new List<AccountModel>();
             // Mengambil value dari tabel di index 0
             var data = ds.Tables[0];
 
@@ -53,16 +58,38 @@ namespace OkOkLa.Shop.Controllers
             foreach (DataRow u in data.Rows)
             {
                 // Membuat object User baru
-                UserModel user = new UserModel();
+                AccountModel admin = new AccountModel();
                 // Mengisi id dan username dari object user dengan nilai dari database
-                user.Id = u.Field<Int32>(data.Columns[0]);
-                user.Username = u.Field<string>(data.Columns[1]);
+                admin.Id = u.Field<Int32>(data.Columns[0]);
+                admin.Username = u.Field<string>(data.Columns[1]);
+                admin.Password = u.Field<string>(data.Columns[2]);
                 // Menambahkan user ke users (List of User)
-                users.Add(user);
+                admins.Add(admin);
             }
 
-            ViewData["data"] = users;
-            return View();
+            ViewData["data"] = admins;
+
+            bool berhasil = true;
+            foreach (var admin in admins) 
+            {
+                if (admin.Username == username && admin.Password == password)
+                {
+                    Console.WriteLine("Login Berhasil");
+                    break;
+                } else 
+                {
+                    Console.WriteLine("Cek Kembali username dan password Anda!");
+                    berhasil = false;
+                }
+            }
+
+            switch (berhasil)
+            {
+                case true:
+                    return RedirectToAction("History");
+                case false:
+                    return RedirectToAction("Login");
+            }
         }
 
         public IActionResult History()
@@ -102,37 +129,64 @@ namespace OkOkLa.Shop.Controllers
             return View();
         }
 
-        public IActionResult Insert()
+        public IActionResult Berhasil()
+        {
+            // Reinisialiasi ds dan param agar dataset dan parameter nya kembali null
+            ds = new DataSet();
+            param = new NpgsqlParameter[] { };
+
+            // Query Select
+            query = "SELECT * FROM transactions;";
+            // Panggil DBConn untuk eksekusi Query
+            helper.DBConn(ref ds, query, param);
+
+            // List of Transaction untuk menampung data user
+            List<TransactionModel> transactions = new List<TransactionModel>();
+            // Mengambil value dari tabel di index 0
+            var data = ds.Tables[0];
+
+            // Perulangan untuk mengambil instance tiap baris dari tabel
+            foreach (DataRow u in data.Rows)
+            {
+                // Membuat object User baru
+                TransactionModel transaction = new TransactionModel();
+                // Mengisi id dan username dari object user dengan nilai dari database
+                transaction.Id = u.Field<Int32>(data.Columns[0]);
+                transaction.Akungame_Id = u.Field<string>(data.Columns[1]);
+                transaction.Game = u.Field<string>(data.Columns[2]);
+                transaction.Game_Money = u.Field<string>(data.Columns[3]);
+                transaction.Harga = u.Field<Int32>(data.Columns[4]);
+                transaction.Metode_Pembayaran = u.Field<string>(data.Columns[5]);
+                transaction.Email = u.Field<string>(data.Columns[6]);
+                // Menambahkan user ke users (List of User)
+                transactions.Add(transaction);
+            }
+
+            ViewData["data"] = transactions;
+            return View();
+        }
+
+        public IActionResult MobileLegends()
         {
             return View();
         }
 
-        public IActionResult Edit(int Id, string Username)
+        public IActionResult Valorant()
         {
             return View();
         }
 
-        public IActionResult MobileLegends(int Id, string Username)
+        public IActionResult FreeFire()
         {
             return View();
         }
 
-        public IActionResult Valorant(int Id, string Username)
+        public IActionResult LoL()
         {
             return View();
         }
 
-        public IActionResult FreeFire(int Id, string Username)
-        {
-            return View();
-        }
-
-        public IActionResult LoL(int Id, string Username)
-        {
-            return View();
-        }
-
-        public IActionResult GenshinImpact(int Id, string Username)
+        public IActionResult GenshinImpact()
         {
             return View();
         }
@@ -191,7 +245,7 @@ namespace OkOkLa.Shop.Controllers
             query = "INSERT INTO transactions VALUES (@id, @akungame_id, @game, @game_money, @harga, @metode_pembayaran, @email);";
             helper.DBConn(ref ds, query, param);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Berhasil");
         }
 
         public IActionResult InsertValorant(TransactionModel transaction)
@@ -242,7 +296,7 @@ namespace OkOkLa.Shop.Controllers
             query = "INSERT INTO transactions VALUES (@id, @akungame_id, @game, @game_money, @harga, @metode_pembayaran, @email);";
             helper.DBConn(ref ds, query, param);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Berhasil");
         }
 
         public IActionResult InsertFreeFire(TransactionModel transaction)
@@ -290,7 +344,7 @@ namespace OkOkLa.Shop.Controllers
             query = "INSERT INTO transactions VALUES (@id, @akungame_id, @game, @game_money, @harga, @metode_pembayaran, @email);";
             helper.DBConn(ref ds, query, param);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Berhasil");
         }
 
         public IActionResult InsertLoL(TransactionModel transaction)
@@ -335,7 +389,7 @@ namespace OkOkLa.Shop.Controllers
             query = "INSERT INTO transactions VALUES (@id, @akungame_id, @game, @game_money, @harga, @metode_pembayaran, @email);";
             helper.DBConn(ref ds, query, param);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Berhasil");
         }
 
         public IActionResult InsertGenshinImpact(TransactionModel transaction)
@@ -383,7 +437,49 @@ namespace OkOkLa.Shop.Controllers
             query = "INSERT INTO transactions VALUES (@id, @akungame_id, @game, @game_money, @harga, @metode_pembayaran, @email);";
             helper.DBConn(ref ds, query, param);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Berhasil");
+        }
+
+        public IActionResult List()
+        {
+            // Reinisialiasi ds dan param agar dataset dan parameter nya kembali null
+            ds = new DataSet();
+            param = new NpgsqlParameter[] { };
+
+            // Query Select
+            query = "SELECT * FROM users;";
+            // Panggil DBConn untuk eksekusi Query
+            helper.DBConn(ref ds, query, param);
+
+            // List of User untuk menampung data user
+            List<UserModel> users = new List<UserModel>();
+            // Mengambil value dari tabel di index 0
+            var data = ds.Tables[0];
+
+            // Perulangan untuk mengambil instance tiap baris dari tabel
+            foreach (DataRow u in data.Rows)
+            {
+                // Membuat object User baru
+                UserModel user = new UserModel();
+                // Mengisi id dan username dari object user dengan nilai dari database
+                user.Id = u.Field<Int32>(data.Columns[0]);
+                user.Username = u.Field<string>(data.Columns[1]);
+                // Menambahkan user ke users (List of User)
+                users.Add(user);
+            }
+
+            ViewData["data"] = users;
+            return View();
+        }
+
+        public IActionResult Insert()
+        {
+            return View();
+        }
+
+        public IActionResult Edit(int Id, string Username)
+        {
+            return View();
         }
 
         public IActionResult InsertUser(UserModel user)

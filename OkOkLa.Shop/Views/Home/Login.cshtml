@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Login Admin";
+}
+
+
+<div class="container d-flex justify-content-center align-items-center" style="font-family: 'Barlow' , sans-serif; width: 750px; height: 500px;">
+    <div class="row">
+        <div class="col py-4">
+            <h1><b>@ViewData["Title"]</b></h1>
+        </div>
+        <div class="col">
+            @model OkOkLa.Shop.Models.AccountModel
+            <form asp-controller="Home" asp-action="LoginAdmin">
+                <div class="form-group">
+                    <label asp-for="Username">Username</label>
+                    <input asp-for="Username" type="text" class="form-control" id="username">
+                    <label asp-for="Password" class="mt-2">Password</label>
+                    <input asp-for="Password" type="text" class="form-control" id="password">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+            </form>
+        </div>
+    </div>
+   
+    
+    
+</div>

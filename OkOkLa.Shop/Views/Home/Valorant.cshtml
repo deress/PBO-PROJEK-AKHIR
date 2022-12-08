@@ -2,93 +2,87 @@
     ViewData["Title"] = "Valorant";
 }
 
-<div class="container" style="font-family: 'Barlow' , sans-serif;">
-    <div class="row">
-        <div class="col" style="color: white">
-            <img src="https://cdn1.codashop.com/S/content/common/images/mno/VALORANT_Coda_640x241.jpg" class="img-fluid py-2">
-            <h5><b>VALORANT</b></h5>
-            <div class="text-justify" style=" font-size:15px">
-                <p>
-                    Harga sudah termasuk PPN. 
-                </p>
-                <p>
-                    Top up VALORANT Points hanya dalam hitungan detik! Cukup masukan ID Riot Anda, pilih jumlah Points yang Anda inginkan, selesaikan pembayaran, dan Poin akan secara langsung ditambahkan ke akun VALORANT Anda.
-                </p>
-                <p>
-                    Bayarlah menggunakan GoPay, ShopeePay, Dana, OVO ataupun langsung di tempat. Tanpa perlu registrasi ataupun log-in.
-                    Unduh dan mainkan VALORANT sekarang!
-                </p>
+
+@{
+    <div class="container" style="font-family: 'Barlow' , sans-serif;">
+        <div class="row">
+            <div class="col" style="color: white">
+                <img src="https://cdn1.codashop.com/S/content/common/images/mno/VALORANT_Coda_640x241.jpg" class="img-fluid py-2">
+                <h5><b>VALORANT</b></h5>
+                <div class="text-justify" style=" font-size:15px">
+                    <p>
+                        Harga sudah termasuk PPN.
+                    </p>
+                    <p>
+                        Top up VALORANT Points hanya dalam hitungan detik! Cukup masukan ID Riot Anda, pilih jumlah Points yang Anda inginkan, selesaikan pembayaran, dan Poin akan secara langsung ditambahkan ke akun VALORANT Anda.
+                    </p>
+                    <p>
+                        Bayarlah menggunakan GoPay, ShopeePay, Dana, OVO ataupun langsung di tempat. Tanpa perlu registrasi ataupun log-in.
+                        Unduh dan mainkan VALORANT sekarang!
+                    </p>
+                </div>
+            </div>
+
+            @model OkOkLa.Shop.Models.TransactionModel
+            <div class="col-8">
+                <form asp-controller="Home" asp-action="InsertValorant" class="m-2">
+                    <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                        <label asp-for="Akungame_Id">Masukkan ID Akun Game</label>
+                        <input asp-for="Akungame_Id" type="text" class="form-control" id="Akungame_Id" placeholder="Masukkan GAME ID">
+                    </div>
+
+                    <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                        <label asp-for="Game_Money">Pilih Nominal Top Up</label>
+                        <select asp-for="Game_Money" id="Game_Money" class="form-control">
+                            <option value="125 Points">125 Points</option>
+                            <option value="420 Points">420 Points</option>
+                            <option value="700 Points">700 Points</option>
+                            <option value="1375 Points">1375 Points</option>
+                            <option value="2400 Points">2400 Points</option>
+                            <option value="4000 Points">4000 Points</option>
+                            <option value="8150 Points">8150 Points</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                        <label>Pilih Pembayaran</label>
+
+                        <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 7px">
+                            <div class="form-check">
+                                <input asp-for="Metode_Pembayaran" type="radio" value="Gopay" id="Metode_Pembayaran" class="form-check-input" style="margin-top:10px;margin-left:-20px;">
+                                <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                    <img src="https://antinomi.org/wp-content/uploads/2022/03/logo-gopay-vector.png" class="img-fluid" style="width:110px;">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
+                            <div class="form-check">
+                                <input asp-for="Metode_Pembayaran" type="radio" value="OVO" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
+                                <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo_purple.svg/320px-Logo_ovo_purple.svg.png" class="img-fluid" style="width:100px;">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
+                            <div class="form-check">
+                                <input asp-for="Metode_Pembayaran" type="radio" value="Dana" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
+                                <label asp-for="Metode_Pembayaran" class="form-check-label">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/2560px-Logo_dana_blue.svg.png" class="img-fluid" style="width:115px;">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
+                        <label asp-for="Email">Masukkan Email Anda</label>
+                        <input asp-for="Email" type=" text" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Alamat E-mail">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data yang diinputkan benar?')">Beli</button>
+                </form>
             </div>
         </div>
-
-        @model OkOkLa.Shop.Models.TransactionModel
-        <div class="col-8">
-            <form asp-controller="Home" asp-action="InsertValorant" class="m-2">
-                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
-                    <label asp-for="Akungame_Id">Masukkan ID Akun Game</label>
-                    <input asp-for="Akungame_Id" type="text" class="form-control" id="Akungame_Id" placeholder="Masukkan GAME ID">
-                </div>
-
-                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
-                    <label asp-for="Game_Money">Pilih Nominal Top Up</label>
-                    <select asp-for="Game_Money" id="Game_Money" class="form-control">
-                        <option value="125 Points">125 Points</option>
-                        <option value="420 Points">420 Points</option>
-                        <option value="700 Points">700 Points</option>
-                        <option value="1375 Points">1375 Points</option>
-                        <option value="2400 Points">2400 Points</option>
-                        <option value="4000 Points">4000 Points</option>
-                        <option value="8150 Points">8150 Points</option>
-                    </select>
-                </div>
-
-                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
-                    <label>Pilih Pembayaran</label>
-
-                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
-                        <div class="form-check">
-                            <input asp-for="Metode_Pembayaran" type="radio" value="Bayar Tunai" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
-                            <label asp-for="Metode_Pembayaran" class="form-check-label">
-                                <h4><b>Bayar Tunai</b></h4>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 7px">
-                        <div class="form-check">
-                            <input asp-for="Metode_Pembayaran" type="radio" value="Gopay" id="Metode_Pembayaran" class="form-check-input" style="margin-top:10px;margin-left:-20px;">
-                            <label asp-for="Metode_Pembayaran" class="form-check-label">
-                                <img src="https://antinomi.org/wp-content/uploads/2022/03/logo-gopay-vector.png" class="img-fluid" style="width:110px;">
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
-                        <div class="form-check">
-                            <input asp-for="Metode_Pembayaran" type="radio" value="OVO" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
-                            <label asp-for="Metode_Pembayaran" class="form-check-label">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo_purple.svg/320px-Logo_ovo_purple.svg.png" class="img-fluid" style="width:100px;">
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="container border rounded" style="margin-bottom: 10px;height: 55px;padding: 10px">
-                        <div class="form-check">
-                            <input asp-for="Metode_Pembayaran" type="radio" value="Dana" id="Metode_Pembayaran" class="form-check-input" style="margin-top:7px;">
-                            <label asp-for="Metode_Pembayaran" class="form-check-label">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/2560px-Logo_dana_blue.svg.png" class="img-fluid" style="width:115px;">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group mb-3 p-3 border rounded" style="background-color: white">
-                    <label asp-for="Email">Masukkan Email Anda</label>
-                    <input asp-for="Email" type=" text" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Alamat E-mail">
-                </div>
-
-                <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data yang diinputkan benar?')">Beli</button>
-            </form>
-        </div>
     </div>
-</div>
+}

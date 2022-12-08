@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Top Up Berhasil";
+}
+
+@{
+    var data = (List<TransactionModel>)ViewData["data"]!;
+    int panjang = data.Count();
+    var data_beli = data[panjang - 1];
+
+    {
+        <div class="container" style="font-family: 'Barlow' , sans-serif; width: 750px">
+            <h4><b>Pembayaran Berhasil</b></h4>
+            <p>Transaksi Anda berhasil, item anda akan ditambahkan ke permainan secara otomatis. Terim kasih telah membeli di OkOkLa!!</p>
+            <div class="card" style="border-color: #d4d3d2">
+                <div class="card-body p-0" style="background-color: #F8CB2E">
+                    <div class="row pt-4 px-4">
+                        <div class="col">
+                            <p class="font-weight-bold">Voucher</p>
+                            <p class="font-weight-bold">Item</p>
+                            <p class="font-weight-bold">ID Game</p>
+                        </div>
+                        <div class="col">
+                            <p>@data_beli.Game</p>
+                            <p>@data_beli.Game_Money</p>
+                            <p>@data_beli.Akungame_Id</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-1 px-4" style="background-color: #d4d3d2">
+                    <div class="row">
+                        <div class="col-10">
+                            <p class="font-weight-bold">Harga</p>
+                        </div>
+                        <div class="col-2 px-4">
+                            <p>Rp @data_beli.Harga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <p class="font-weight-bold">Metode Pembayaran</p>
+                    <p class="font-weight-bold">Email</p>
+                    <p class="font-weight-bold">Nomor Pembelian</p>
+
+                </div>
+                <div class="col">
+                    <p>@data_beli.Metode_Pembayaran</p>
+                    <p>@data_beli.Email</p>
+                    <p>@data_beli.Id</p>
+                </div>
+            </div>
+            <a class="btn btn-primary" style="text-decoration:none;" asp-area=" " asp-controller="Home" asp-action="Index">
+                Lanjutkan
+            </a>
+        </div>
+    }
+}
